@@ -1,1 +1,65 @@
-<p>movies-list works!</p>
+<div id="panel">
+  <h1>Welcome to Betsafe movie catalogue</h1>
+  <form #form="ngForm" (ngSubmit)="onSubmit()">
+    <mat-form-field [floatLabel]="'never'">
+      <input
+        type="search"
+        matInput
+        placeholder="Search"
+        [(ngModel)]="searchString"
+        name="searchString"
+      />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">
+      Search
+    </button>
+  </form>
+</div>
+<div class="align-content-center justify-content-center">
+  <ng-container *ngIf="searchString && response === 'False'">
+    <h1>Movies not found!!</h1>
+  </ng-container>
+  <ng-container *ngIf="!searchString && page === '1'">
+    <h1>Type something in the search box to search</h1>
+  </ng-container>
+  <ng-container *ngIf="movies.length">
+    <pagination-controls
+      (pageChange)="pageChange($event)"
+    ></pagination-controls>
+    <mat-grid-list cols="5" rowHeight="1:1.25">
+      <div
+        *ngFor="
+          let movie of movies
+            | paginate
+              : {
+                  itemsPerPage: itemsPerPage,
+                  currentPage: page,
+                  totalItems: totalResults,
+                  maxSize: maxSize
+                }
+        "
+      >
+        <mat-grid-tile class="movie-item d-flex flex-wrap">
+          <a [routerLink]="movie.imdbID">
+            <mat-card>
+              <img
+                mat-card-image
+                [src]="movie.Poster"
+                onerror="this.onerror=null; this.src='assets/images/poster_not_available.PNG'"
+                [alt]="movie.Title"
+              />
+              <mat-card-content>
+                <p>
+                  <b> {{ movie.Title }} </b>
+                  <br />
+                  <i> {{ movie.Type }} {{ movie.Year }} </i>
+                </p>
+              </mat-card-content>
+              <!-- <mat-card-actions> </mat-card-actions> -->
+            </mat-card>
+          </a>
+        </mat-grid-tile>
+      </div>
+    </mat-grid-list>
+  </ng-container>
+</div>

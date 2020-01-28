@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FourOFourComponent } from './four-o-four/four-o-four.component';
-import { AppComponent } from './app.component';
 
 
 const routes: Routes = [
-
   {
     path: '',
-    component: AppComponent
+    redirectTo: 'movies',
+    pathMatch: 'full'
+  },
+  {
+    path: 'movies',
+    loadChildren: () => import('./movies/movies.module').then(m => m.MoviesModule)
   },
   {
     path: '**',

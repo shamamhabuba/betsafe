@@ -1,1 +1,43 @@
-<p>movie-details works!</p>
+<div class="container" *ngIf="movie">
+  <br />
+  <div class="d-flex flex-wrap align-content-center justify-content-start">
+    <div class="movie__thumbnails">
+      <img
+        [src]="movie.Poster"
+        onerror="this.onerror=null; this.src='assets/images/poster_not_available.PNG'"
+      />
+    </div>
+    <div class="movie__headline align-self-end">
+      <b>{{ movie.Title }}</b>
+      <br />
+      <i>{{ movie.Runtime }}</i>
+      <i>Rating: {{ movie.imdbRating }}</i>
+      <ng-template #t let-fill="fill">
+        <span class="star" [class.full]="fill === 100">
+          <span class="half" [style.width.%]="fill"
+            ><em class="fa fa-star text-warning"></em>&#9733;</span
+          ><em class="fa fa-star-o text-warning cursor"></em>
+        </span>
+      </ng-template>
+
+      <ngb-rating
+        [(rate)]="movie.imdbRating"
+        [starTemplate]="t"
+        [readonly]="true"
+        max="10"
+      ></ngb-rating>
+
+      <!-- <app-rating [rating]="movie.rating"></app-rating> -->
+    </div>
+  </div>
+  <hr />
+  <div>
+    <p>
+      <b>Plot: </b>
+      {{ movie.Plot }}
+    </p>
+  </div>
+  <br />
+  <br />
+  <button mat-raised-button routerLink="/movies">Back to search</button>
+</div>

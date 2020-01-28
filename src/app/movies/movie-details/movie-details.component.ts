@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { MovieClientService } from 'src/app/shared/movie-client.service';
+import { Movie } from 'src/app/shared/movie.interfaces';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-movie-details',
@@ -7,9 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovieDetailsComponent implements OnInit {
 
-  constructor() { }
+  movie: Movie = null;
+
+  constructor(private route: ActivatedRoute, private movieClient: MovieClientService) { }
 
   ngOnInit() {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
+        this.movieClient.getMovieDetails(params.get('imdbID'))
+      )
+    )
+    .subscribe(movie => {
+      this.movie = movie;
+    });
   }
 
 }
