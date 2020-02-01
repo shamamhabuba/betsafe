@@ -30,6 +30,7 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
     MoviesRoutingModule,
     MatGridListModule,
     NgbRatingModule,
+
   ],
   exports: [],
   bootstrap: [MovieDetailsComponent],
