@@ -1,33 +1,39 @@
 <div id="panel">
+  <br />
   <h1>Welcome to Betsafe movie catalogue</h1>
+  <br />
   <form #form="ngForm" (ngSubmit)="onSubmit()">
     <mat-form-field [floatLabel]="'never'">
       <input
+        class="border rounded"
         type="search"
         matInput
-        placeholder="Search"
+        placeholder="Search..."
         [(ngModel)]="searchString"
         name="searchString"
       />
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">
+    <button mat-raised-button class="btn btn-secondary" type="submit">
       Search
     </button>
   </form>
+  <br />
 </div>
-<div class="align-content-center justify-content-center">
+
+<br />
+<div class="d-flex flex-wrap align-content-center justify-content-center">
   <ng-container *ngIf="searchString && response === 'False'">
-    <h1>Movies not found!!</h1>
+    <h2>Movies not found!!</h2>
   </ng-container>
-  <ng-container *ngIf="!searchString && page === '1'">
-    <h1>Type something in the search box to search</h1>
+  <ng-container *ngIf="!searchString && page === '0'">
+    <h2>Type something in the search box to search</h2>
   </ng-container>
   <ng-container *ngIf="movies.length">
-    <pagination-controls
-      (pageChange)="pageChange($event)"
-    ></pagination-controls>
-    <mat-grid-list cols="5" rowHeight="1:1.25">
+    <pagination-controls (pageChange)="pageChange($event)">
+    </pagination-controls>
+    <div class="row align-content-center justify-content-center">
       <div
+        class="col-xl-2 col-lg-3 col-md-4 movie-item"
         *ngFor="
           let movie of movies
             | paginate
@@ -39,27 +45,27 @@
                 }
         "
       >
-        <mat-grid-tile class="movie-item d-flex flex-wrap">
-          <a [routerLink]="movie.imdbID">
-            <mat-card>
-              <img
-                mat-card-image
-                [src]="movie.Poster"
-                onerror="this.onerror=null; this.src='assets/images/poster_not_available.PNG'"
-                [alt]="movie.Title"
-              />
-              <mat-card-content>
-                <p>
-                  <b> {{ movie.Title }} </b>
-                  <br />
-                  <i> {{ movie.Type }} {{ movie.Year }} </i>
-                </p>
-              </mat-card-content>
-              <!-- <mat-card-actions> </mat-card-actions> -->
-            </mat-card>
-          </a>
-        </mat-grid-tile>
+        <a [routerLink]="movie.imdbID">
+          <mat-card>
+            <img
+              mat-card-image
+              [src]="movie.Poster"
+              onerror="this.onerror=null; this.src='assets/images/poster_not_available.PNG'"
+              [alt]="movie.Title"
+            />
+            <mat-card-content>
+              <p>
+                <b> {{ movie.Title }} </b>
+                <br />
+                <i> {{ movie.Type }} {{ movie.Year }} </i>
+              </p>
+            </mat-card-content>
+            <!-- <mat-card-actions> </mat-card-actions> -->
+          </mat-card>
+        </a>
       </div>
-    </mat-grid-list>
+    </div>
+    <pagination-controls (pageChange)="pageChange($event)">
+    </pagination-controls>
   </ng-container>
 </div>

@@ -8,15 +8,20 @@
       />
     </div>
     <div class="movie__headline align-self-end">
-      <b>{{ movie.Title }}</b>
+      <h2>{{ movie.Title }}</h2>
       <br />
-      <i>{{ movie.Runtime }}</i>
-      <i>Rating: {{ movie.imdbRating }}</i>
+      <i>Runtime: {{ movie.Runtime }}</i>
+      <br />
+      <b>Released: {{ movie.Year }}</b>
+      <br />
+      <h6>Type: {{ movie.Type.toLocaleUpperCase() }}</h6>
+      <i>Genre: {{ movie.Genre }} </i>
+      <br />
+      <i>IMDb Rating: {{ movie.imdbRating }}</i>
+      <br />
       <ng-template #t let-fill="fill">
         <span class="star" [class.full]="fill === 100">
-          <span class="half" [style.width.%]="fill"
-            ><em class="fa fa-star text-warning"></em>&#9733;</span
-          ><em class="fa fa-star-o text-warning cursor"></em>
+          <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
         </span>
       </ng-template>
 
@@ -26,8 +31,6 @@
         [readonly]="true"
         max="10"
       ></ngb-rating>
-
-      <!-- <app-rating [rating]="movie.rating"></app-rating> -->
     </div>
   </div>
   <hr />
