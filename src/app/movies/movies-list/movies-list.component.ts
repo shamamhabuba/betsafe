@@ -8,7 +8,7 @@ import { Movie } from 'src/app/shared/movie.interfaces';
   templateUrl: './movies-list.component.html',
   styleUrls: ['./movies-list.component.sass'],
 })
-export class MovieListComponent implements OnInit, OnDestroy {
+export class MoviesListComponent implements OnInit, OnDestroy {
   searchString = '';
 
   itemsPerPage = '10';
