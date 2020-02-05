@@ -2,26 +2,27 @@
   <br />
   <h1>Welcome to Betsafe movie catalogue</h1>
   <br />
-  <form #form="ngForm" (ngSubmit)="onSubmit()">
-    <mat-form-field [floatLabel]="'never'">
-      <input
-        class="border rounded"
-        type="search"
-        matInput
-        placeholder="Search..."
-        [(ngModel)]="searchString"
-        name="searchString"
-      />
-    </mat-form-field>
-    <button mat-raised-button class="btn btn-secondary" type="submit">
-      Search
-    </button>
-  </form>
+  <div class="row justify-content-center">
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="searchString"
+          name="searchString"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-secondary" type="submit">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
   <br />
 </div>
 
 <br />
-<div class="d-flex flex-wrap align-content-center justify-content-center">
+<div class="text-center">
   <ng-container *ngIf="searchString && response === 'False'">
     <h2>Movies not found!!</h2>
   </ng-container>
@@ -31,7 +32,9 @@
   <ng-container *ngIf="movies.length">
     <pagination-controls (pageChange)="pageChange($event)">
     </pagination-controls>
-    <div class="row align-content-center justify-content-center">
+    <div
+      class="row d-flex flex-wrap align-content-center justify-content-center"
+    >
       <div
         class="col-xl-2 col-lg-3 col-md-4 movie-item"
         *ngFor="
@@ -60,12 +63,9 @@
                 <i> {{ movie.Type }} {{ movie.Year }} </i>
               </p>
             </mat-card-content>
-            <!-- <mat-card-actions> </mat-card-actions> -->
           </mat-card>
         </a>
       </div>
     </div>
-    <pagination-controls (pageChange)="pageChange($event)">
-    </pagination-controls>
   </ng-container>
 </div>

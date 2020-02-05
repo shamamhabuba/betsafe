@@ -3,6 +3,7 @@
   <div class="d-flex flex-wrap align-content-center justify-content-start">
     <div class="movie__thumbnails">
       <img
+        style="max-height: 500px;"
         [src]="movie.Poster"
         onerror="this.onerror=null; this.src='assets/images/poster_not_available.PNG'"
       />
@@ -21,7 +22,7 @@
       <br />
       <ng-template #t let-fill="fill">
         <span class="star" [class.full]="fill === 100">
-          <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+          <span class="half" [style.width.%]="fill">&#10059;</span>&#10059;
         </span>
       </ng-template>
 
@@ -37,10 +38,20 @@
   <div>
     <p>
       <b>Plot: </b>
-      {{ movie.Plot}}
+      {{ movie.Plot }}
     </p>
   </div>
   <br />
-  <br />
-  <button mat-raised-button routerLink="/movies">Back to search</button>
+  <div class="row justify-content-center">
+    <div class="col-xl-3 col-lg-4 col-md-5">
+      <button mat-raised-button class="btn-block btn-secondary" (click)="backToSearch()">
+        Back to Search Result
+      </button>
+    </div>
+    <div class="col-xl-3 col-lg-4 col-md-5">
+      <button mat-raised-button class="btn-block btn-secondary" routerLink="/movies">
+        Go to Home
+      </button>
+    </div>
+  </div>
 </div>
