@@ -8,18 +8,18 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { of } from 'rxjs';
 import { MovieClientService } from 'src/app/shared/movie-client.service';
-import { MovieListComponent } from './movie-list.component';
+import { MoviesListComponent } from './movies-list.component';
 
 describe('MovieListComponent', () => {
-  let component: MovieListComponent;
-  let fixture: ComponentFixture<MovieListComponent>;
+  let component: MoviesListComponent;
+  let fixture: ComponentFixture<MoviesListComponent>;
   const mockRouter = {
     navigate: jasmine.createSpy('navigate'),
   };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MovieListComponent],
+      declarations: [MoviesListComponent],
       imports: [
         HttpClientTestingModule,
         FormsModule,
@@ -45,7 +45,7 @@ describe('MovieListComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MovieListComponent);
+    fixture = TestBed.createComponent(MoviesListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
